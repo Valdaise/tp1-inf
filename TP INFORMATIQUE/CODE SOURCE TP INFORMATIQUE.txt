@@ -1,0 +1,57 @@
+#ceci est un exemple de code ecrit en python pour la simulation des feux de carrefour
+#la carte utilisee est une carte RASBERY Pi3 
+#les broches sont configurees en BCM 
+#le temps pour quitter du feux vert au feux orange est de 5 secondes (modifier si necessaire)
+#le temps pour quitter du feux orange au feux rouge est de 2 secondes (modifier si necessaire)
+
+import RPi.GPIO as VGAT
+import time 
+#configuration des broches de la carte RASBERY Pi a utiliser
+VGAT.setmode(VGAT.BCM)
+VGAT.setwarnings(False)
+#declaration des entrees/sorties de la carte RASBERY Pi a utiliser
+rouge1 = 4
+jaune1 = 5
+vert1 = 6
+rouge2 = 17
+jaune2 = 18 
+vert2 = 19
+#configuration des broches en sorties
+VGAT.setup(rouge1,VGAT.OUT)
+VGAT.setup(jaune1,VGAT.OUT)
+VGAT.setup(vert1,VGAT.OUT)
+VGAT.setup(rouge2,VGAT.OUT)
+VGAT.setup(jaune2,VGAT.OUT)
+VGAT.setup(vert2,VGAT.OUT)
+# corps du programme d'exécution
+while 1 :
+   VGAT.output(vert1,True)
+   VGAT.output(rouge2,True)
+   VGAT.output(vert2,False)
+   VGAT.output(rouge1,False)
+   VGAT.output(jaune1,False)
+   VGAT.output(jaune2,False)
+   time.sleep(5)
+   VGAT.output(vert1,False)
+   VGAT.output(rouge2,True)
+   VGAT.output(vert2,False)
+   VGAT.output(rouge1,False)
+   VGAT.output(jaune1,True)
+   VGAT.output(jaune2,False)
+   time.sleep(2)
+   VGAT.output(vert1,False)
+   VGAT.output(rouge2,False)
+   VGAT.output(vert2,True)
+   VGAT.output(rouge1,True)
+   VGAT.output(jaune1,False)
+   VGAT.output(jaune2,False)
+   time.sleep(5)
+   VGAT.output(vert1,False)
+   VGAT.output(rouge2,False)
+   VGAT.output(vert2,False)
+   VGAT.output(rouge1,True)
+   VGAT.output(jaune1,False)
+   VGAT.output(jaune2,True)
+   time.sleep(2)
+   
+   
